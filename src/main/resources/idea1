@@ -1,0 +1,30 @@
+ AbstractFlightRoute flightRoute1 =  new FlightRoute("Warszawa","Gdansk");
+        AbstractFlightRoute flightRoute2 =  new FlightRoute("Warszawa","Krakow");
+        AbstractFlightRoute flightRoute3 =  new FlightRoute("Warszawa","Poznan");
+        AbstractFlightRoute flightRoute4 =  new FlightRoute("Poznan","Lodz");
+
+        IFlightDatabase flightDatabase = new FlightDatabase();
+
+        Map<Integer,Map<String,String>> list = new HashMap<>();
+        list.put(1,flightDatabase.flightMap(flightRoute1));
+        list.put(2,flightDatabase.flightMap(flightRoute2));
+        list.put(3,flightDatabase.flightMap(flightRoute3));
+        list.put(4,flightDatabase.flightMap(flightRoute4));
+
+        String w = "Warszawa";
+        String l = "Lodz";
+
+        for (Map<Integer,String> map : list.entrySet()){
+            if (map.entrySet().stream()
+                    .filter(m1->m1.getValue().containsKey(w)) && (m1->m1.getValue().containsValue(l))){
+            sout("Direct route exist form '" + w + "' -> '" + l "'");
+            } else{
+            map.entrySet().stream()
+                .filter(m1->m1.getValue().containsKey(w))
+                .itertor().next(). ->
+                    //check what containsValue() are associate  with String 'w' and continue search
+                    //if new containsValue() that become now containsKey() has containsValue().equal(l)
+                    //if not continue again and again
+                (m1->m1.getValue().containsValue(l)){
+                    sout("There is indirect rout from '" + w + "' -> '" + otherCityFromList + "' -> '" +  l + "'");
+                }

@@ -1,0 +1,39 @@
+ AbstractFlightRoute flightRoute1 =  new FlightRoute("Warszawa","Gdansk");
+         AbstractFlightRoute flightRoute2 =  new FlightRoute("Warszawa","Krakow");
+         AbstractFlightRoute flightRoute3 =  new FlightRoute("Warszawa","Poznan");
+         AbstractFlightRoute flightRoute4 =  new FlightRoute("Poznan","Lodz");
+
+         IFlightDatabase flightDatabase = new FlightDatabase();
+
+         Map<Integer,Map<String,String>> list = new HashMap<>();
+         list.put(1,flightDatabase.flightMap(flightRoute1));
+         list.put(2,flightDatabase.flightMap(flightRoute2));
+         list.put(3,flightDatabase.flightMap(flightRoute3));
+         list.put(4,flightDatabase.flightMap(flightRoute4));
+
+ for (Map.Entry<Integer,Map<String,String>> map : list.entrySet()){
+            map.getValue().entrySet().stream()
+                    .filter(m1->m1.getKey().equals("Warszawa"))
+                    .filter(m2->m2.getValue().equals("Krakow"))
+                    .forEach(System.out::println);
+        }
+
+        List <Map.Entry<String,String>> listA = new ArrayList<>();
+        String a = "";
+        String b = "";
+        for (Map.Entry<Integer,Map<String,String>> map : list.entrySet()){
+            a = map.getValue().entrySet().stream()
+                    .filter(m1->m1.getKey().equals("Warszawa"))
+                    .toString();
+            b = map.getValue().entrySet().stream()
+                    .filter(m1->m1.getKey().equals("Krakow"))
+                    .toString();
+
+//            listA = map.getValue().entrySet().stream()
+//                    .collect(Collectors.toMap(t-> a , t-> b);
+
+            System.out.println("a = " + a);
+            System.out.println("b = " + b);
+
+            System.out.println("Print map -> " + listA);
+        }

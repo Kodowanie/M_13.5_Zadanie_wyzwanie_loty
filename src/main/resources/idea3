@@ -1,0 +1,34 @@
+    AbstractFlightRoute flightRoute1 =  new FlightRoute("Warszawa","Gdansk");
+         AbstractFlightRoute flightRoute2 =  new FlightRoute("Warszawa","Krakow");
+         AbstractFlightRoute flightRoute3 =  new FlightRoute("Warszawa","Poznan");
+         AbstractFlightRoute flightRoute4 =  new FlightRoute("Warszawa","Wroclaw");
+         AbstractFlightRoute flightRoute5 =  new FlightRoute("Poznan","Lodz");
+
+         IFlightDatabase flightDatabase = new FlightDatabase();
+
+         Map<Integer,Map<String,String>> list = new HashMap<>();
+         list.put(1,flightDatabase.flightMap(flightRoute1));
+         list.put(2,flightDatabase.flightMap(flightRoute2));
+         list.put(3,flightDatabase.flightMap(flightRoute3));
+         list.put(4,flightDatabase.flightMap(flightRoute4));
+         list.put(5,flightDatabase.flightMap(flightRoute5));
+
+ List <Map<String,String>> listFrom = new ArrayList();
+        List <Map<String,String>> listTo = new ArrayList();
+
+        listFrom = list.entrySet().stream()
+                .map(m1->m1.getValue())
+                .filter(m2->m2.containsKey("Warszawa"))
+                .collect(Collectors.toList());
+        System.out.println("listFrom v.1 = " + listFrom);
+
+        listTo = list.entrySet().stream()
+                .map(m1->m1.getValue())
+                .filter(m2->m2.containsValue("Lodz"))
+                .collect(Collectors.toList());
+        System.out.println("listTo v.1 = " + listTo);
+
+
+        System.out.println("concat");
+        Stream.concat(listFrom.stream(), listTo.stream())
+                .forEach(System.out::println);
